@@ -42,7 +42,7 @@
                   </div>
                 </div>
               </div>
-            
+        
           </div>
         </div>
       </div>
@@ -87,9 +87,52 @@
             </div>
           </div>
           <div class="sm:col-span-2 sm:flex sm:justify-end">
-            <button type="submit" class="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-teal-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto">
+            <button  type='button' id="btn-submit" class="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-teal-500 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 sm:w-auto">
               Envoyer
             </button>
+            <script>
+              document.getElementById("btn-submit").addEventListener("click", function() {
+
+                // On créer 3 elements div, pour representer les 3 differents div que l'on retrouve dans les messages, ainsi que leur attributs "class"
+                const div1 = document.createElement("div");
+                div1.setAttribute("class", "flex space-x-4 text-sm text-gray-500");
+
+                const div2 = document.createElement("div");
+                div2.setAttribute("class", "flex-1 py-10 border-t border-gray-200");
+
+                const div3 = document.createElement("div");
+                div3.setAttribute("class", "prose prose-sm mt-4 max-w-none text-gray-500");
+
+                // On récupère les differents éléments des zones de textes
+                const firstName = document.getElementById("first-name").value;
+                const lastName = document.getElementById("last-name").value;
+                const newComment = document.getElementById("message").value;
+
+                // On récupère la liste des commentaires existante
+                const commentList = document.getElementById("comment-list");
+
+                // On créer la balise <h3> contenant le nom et prénom de l'utilisateur
+                const commentName = document.createElement("h3");
+                commentName.innerText = (firstName + " " + lastName);
+                commentName.setAttribute("class", "font-medium text-gray-900");
+
+                // On créer la balise <p> contenant le commentaire de l'utilisateur
+                const commentElement = document.createElement("p");
+                commentElement.innerText = newComment;
+                
+                // On créer le module complet : ajouter le div1 au commentaires, le div2 dans le div1, etc...
+                commentList.appendChild(div1);
+                div1.appendChild(div2);
+                div2.appendChild(commentName);
+                div2.appendChild(div3);
+                div3.appendChild(commentElement);
+
+                // Pour finir, on reinitiallise les valeurs des boite de texte.
+                document.getElementById("message").value = "";
+                document.getElementById("first-name").value = "";
+                document.getElementById("last-name").value = "";
+              });
+            </script>
           </div>
         </form>
       </div>
