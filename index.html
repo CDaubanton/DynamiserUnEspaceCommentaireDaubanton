@@ -93,6 +93,21 @@
             <script>
               document.getElementById("btn-submit").addEventListener("click", function() {
 
+                // On récupère les differents éléments des zones de textes ainsi que le message d'erreur
+                const firstName = document.getElementById("first-name").value;
+                const lastName = document.getElementById("last-name").value;
+                const newComment = document.getElementById("message").value;
+                const errorMessage = document.getElementById("error-message")
+
+                // Si l'un des trois champ de texte est vide : On affiche un message d'erreur et le commentaire n'est pas publié.
+                if (firstName  == '' || lastName == '' || newComment == '') {
+                  errorMessage.setAttribute("style", "display: true")
+                  return;
+                }
+
+                // Si les zones de textes ne sont pas vide : On cache le message d'erreur
+                errorMessage.setAttribute("style", "display: none")
+
                 // On créer 3 elements div, pour representer les 3 differents div que l'on retrouve dans les messages, ainsi que leur attributs "class"
                 const div1 = document.createElement("div");
                 div1.setAttribute("class", "flex space-x-4 text-sm text-gray-500");
@@ -101,12 +116,7 @@
                 div2.setAttribute("class", "flex-1 py-10 border-t border-gray-200");
 
                 const div3 = document.createElement("div");
-                div3.setAttribute("class", "prose prose-sm mt-4 max-w-none text-gray-500");
-
-                // On récupère les differents éléments des zones de textes
-                const firstName = document.getElementById("first-name").value;
-                const lastName = document.getElementById("last-name").value;
-                const newComment = document.getElementById("message").value;
+                div3.setAttribute("class", "prose prose-sm mt-4 max-w-none text-gray-500");                
 
                 // On récupère la liste des commentaires existante
                 const commentList = document.getElementById("comment-list");
